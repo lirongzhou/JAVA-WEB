@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mantoto.product.dao.IUserCouponDao">
+  <sql id="column_List" >Source,Status,BTime,ETime,CouponId,Mobile,UserId,CTime,UserCouponId,UseIn</sql>
+  <sql id="sql_Where" >
+<trim> <if test="source>0">  
+and Source = #{source} 
+</if>
+ <if test="status>0">  
+and Status = #{status} 
+</if>
+<if test="bTime != null and bTime!= '' "> 
+and  BTime = #{bTime}   
+</if>
+<if test="eTime != null and eTime!= '' "> 
+and  ETime = #{eTime}   
+</if>
+ <if test="couponId>0">  
+and CouponId = #{couponId} 
+</if>
+<if test="mobile != null and mobile!= '' "> 
+and  Mobile = #{mobile}   
+</if>
+ <if test="userId>0">  
+and UserId = #{userId} 
+</if>
+<if test="cTime != null and cTime!= '' "> 
+and  CTime = #{cTime}   
+</if>
+ <if test="userCouponId>0">  
+and UserCouponId = #{userCouponId} 
+</if>
+ <if test="useIn>0">  
+and UseIn = #{useIn} 
+</if>
+
+</trim></sql>
+<select id="selectByIdUserCoupon"   parameterType="java.lang.String"  resultMap="userCoupon" >
+select <include refid="column_List" /> from UserCoupon where UserCouponId =#{userCouponId}</select>
+<delete id="deleteUserCoupon" parameterType="java.lang.String">
+</delete>
+<update id="updateUserCoupon" parameterType="com.mantoto.product.model.UserCoupon" >
+ UPDATE Msg_UserCoupon  <trim prefix="SET" suffixOverrides=",">   
+ <if test="source>0">  
+Source = #{source} ,
+</if>
+ <if test="status>0">  
+Status = #{status} ,
+</if>
+<if test="bTime != null and bTime!= '' "> 
+BTime = #{bTime},
+</if>
+<if test="eTime != null and eTime!= '' "> 
+ETime = #{eTime},
+</if>
+ <if test="couponId>0">  
+CouponId = #{couponId} ,
+</if>
+<if test="mobile != null and mobile!= '' "> 
+Mobile = #{mobile},
+</if>
+ <if test="userId>0">  
+UserId = #{userId} ,
+</if>
+ <if test="useIn>0">  
+UseIn = #{useIn} 
+</if></trim> where UserCouponId=#{userCouponId} </update>
+<insert id="insertUserCoupon" parameterType="com.mantoto.product.model.UserCoupon" > 
+insert into Msg_UserCoupon (Source,Status,BTime,ETime,CouponId,Mobile,UserId,CTime,UserCouponId,UseIn)values(#{source},#{status},#{bTime},#{eTime},#{couponId},#{mobile},#{userId},#{cTime},#{userCouponId},#{useIn})</insert>  
+<select id="selectUserCoupon"   parameterType="com.mantoto.product.model.UserCoupon"  resultMap="userCoupon" >
+select  top ${pageSize} <include refid="column_List" /> from Msg_UserCoupon  where UserCouponId not in (select top ${bigenRow} UserCouponId from Msg_UserCoupon  where 1=1 <include refid="sql_Where" />) and 1=1<include refid="sql_Where" /></select>
+<resultMap type="com.mantoto.product.model.UserCoupon" id="userCoupon"> 
+ <id property="userCouponId" column="UserCouponId" /> 
+<result property="source" column="Source" /> 
+<result property="status" column="Status" /> 
+<result property="bTime" column="BTime" /> 
+<result property="eTime" column="ETime" /> 
+<result property="couponId" column="CouponId" /> 
+<result property="mobile" column="Mobile" /> 
+<result property="userId" column="UserId" /> 
+<result property="cTime" column="CTime" /> 
+<result property="useIn" column="UseIn" /> 
+</resultMap> 
+<select id="selectCountUserCoupon"   parameterType="com.mantoto.product.model.UserCoupon"  resultType="java.lang.Integer" >
+select count(UserCouponId) from Msg_UserCoupon where 1=1<include refid="sql_Where" /></select>
+</mapper> 
