@@ -1,0 +1,4 @@
+	<select id="#{selectId}" parameterType="#{parameterType}"
+		resultType="#{resultType}">
+	    #{executedSql}
+	</select>

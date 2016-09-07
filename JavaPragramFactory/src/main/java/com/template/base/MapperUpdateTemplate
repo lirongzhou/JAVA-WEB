@@ -1,0 +1,9 @@
+	<update id="#{updateId}" parameterType="#{parameterType}">
+	  #{executedSql}
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="#{testCondition}">
+			#{columField}
+			</if>
+		</trim>
+		where  #{columField}
+	</update>

@@ -1,0 +1,13 @@
+package #{pagckage};
+#{importStr}
+#{classAnnotation}
+/**
+ * #{comments}
+ */
+public #{classType} #{javaName} #{extendsBase} #{implementsBase}{
+
+	#{fields};
+	
+    #{methods}
+	
+}

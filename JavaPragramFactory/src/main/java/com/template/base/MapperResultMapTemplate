@@ -1,0 +1,4 @@
+   <resultMap type="#{resultMapType}" id="#{resultMapId}">
+		<id property="#{idFieldName}" column="#{idColumName}" />
+		#{resultColums}
+	</resultMap>
