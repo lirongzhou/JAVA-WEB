@@ -32,7 +32,6 @@ public class PropertiesOperation extends ToolsBase {
 	public Properties load(String PropertiePath)
 			throws IOException, UnsupportedEncodingException, FileNotFoundException {
 		props.load(new InputStreamReader(new FileInputStream(PropertiePath), System.getProperty("file.encoding")));
-
 		return props;
 	}
 }

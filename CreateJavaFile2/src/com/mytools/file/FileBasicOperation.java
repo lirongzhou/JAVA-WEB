@@ -14,14 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mytools.base.ToolsBase;
-
+/**
+ * 文件的基本操作
+ * @author dell
+ *
+ */
 public class FileBasicOperation extends ToolsBase {
 
 	/**
-	 * ��ȡ�ļ�����
-	 * 
+	 * 获取一个文件
 	 * @param fileName
-	 * @return ����һ���ļ���ʵ��
+	 * @return 如果获取成功返回该文件 否则返回 null
 	 */
 	public File redFile(String fileName) {
 
@@ -36,10 +39,9 @@ public class FileBasicOperation extends ToolsBase {
 	};
 
 	/**
-	 * ��ȡ�ļ�����
-	 * 
+	 * 根据一个文件的路径读取一个文件 返回String 类型文件内容
 	 * @param fileName
-	 * @return �����ļ����� string ����
+	 * @return  返回文件内容
 	 * @throws IOException
 	 */
 	public String redFileToString(String fileName) throws IOException {
@@ -65,10 +67,9 @@ public class FileBasicOperation extends ToolsBase {
 	};
 
 	/**
-	 * ��ȡ�ļ�����
-	 * 
+	 * 根据一个文件的路径读取一个文件 返回List<byte[]>类型文件内容
 	 * @param fileName
-	 * @return ����һ��list byte ��
+	 * @return 
 	 * @throws IOException
 	 */
 	public List<byte[]> redFileToByBytes(String fileName) throws IOException {
@@ -86,7 +87,7 @@ public class FileBasicOperation extends ToolsBase {
 			}
 			while ((fis.read(buf)) != -1) {
 				bytes.add(buf);
-				buf = new byte[1024];// ������ɣ�������ϴζ�ȡ������ظ�
+				buf = new byte[1024];// 锟斤拷锟斤拷锟斤拷桑锟斤拷锟斤拷锟斤拷锟较次讹拷取锟斤拷锟斤拷锟斤拷馗锟�
 			}
 			return bytes;
 		}
@@ -95,16 +96,13 @@ public class FileBasicOperation extends ToolsBase {
 	}
 
 	/**
-	 * ����һ���ļ�
-	 * 
-	 * @param oldFilePath
-	 *            Ҫ���Ƶ��ļ�λ��
-	 * @param newFilePath
-	 *            ���ƺõ��ļ�λ��
+	 * copy 一个文件 按照数据流的方式
+	 * @param oldFilePath 旧文件
+	 * @param newFilePath 目标文件
 	 * @return
 	 * @throws IOException
 	 */
-	public boolean copyFilenputStream(String oldFilePath, String newFilePath) throws IOException {
+	public boolean copyFileInputStream(String oldFilePath, String newFilePath) throws IOException {
 		if (super.isNull(oldFilePath))
 			return false;
 		if (super.isNull(newFilePath))
@@ -122,8 +120,7 @@ public class FileBasicOperation extends ToolsBase {
 	}
 
 	/**
-	 * ����һ���ļ� ��BuffereWriteʵ��
-	 * 
+	 * copy 一个文件 按照字符串的方式
 	 * @param oldFilePath
 	 * @param newFilePath
 	 * @return
@@ -147,12 +144,10 @@ public class FileBasicOperation extends ToolsBase {
 	}
 
 	/**
-	 * д�ļ�
-	 * 
-	 * @param content
-	 *            д���ļ�������
-	 * @param filePath
-	 * @return �Ƿ�д��ɹ�
+	 * 把内容写入到目标文件
+	 * @param content  文件内容
+	 * @param filePath  目标文件
+	 * @return  返回是否执行成功
 	 * @throws IOException
 	 */
 	public boolean setFile(String content, String filePath) throws IOException {
@@ -172,10 +167,9 @@ public class FileBasicOperation extends ToolsBase {
 	}
 
 	/**
-	 * д�ļ�
-	 * 
-	 * @param listByte
-	 * @return
+	 * 把List<byte[]> listByte内容写入到目标文件
+	 * @param listByte byte类型的数据
+	 * @return 返回执行结果 true| false
 	 * @throws IOException
 	 */
 	public boolean setFile(List<byte[]> listByte, String filePath) throws IOException {
@@ -202,11 +196,10 @@ public class FileBasicOperation extends ToolsBase {
 	}
 
 	/**
-	 * ���������ļ�����
-	 * 
-	 * @param path
-	 * @param oldname
-	 * @param newname
+	 * 文件的重新命名
+	 * @param path 文件路径
+	 * @param oldname 旧名
+	 * @param newname 新名
 	 * @return
 	 */
 	public boolean renameFile(String path, String oldname, String newname) {
@@ -216,11 +209,11 @@ public class FileBasicOperation extends ToolsBase {
 			return false;
 		if (super.isNull(newname))
 			return false;
-		if (!oldname.equals(newname)) {// �µ��ļ������ǰ�ļ���ͬʱ,���б�Ҫ����������
+		if (!oldname.equals(newname)) {
 			File oldfile = new File(path + "/" + oldname);
 			File newfile = new File(path + "/" + newname);
-			if (newfile.exists())// ���ڸ�Ŀ¼���Ѿ���һ���ļ������ļ�����ͬ��������������
-				System.out.println(newname + "�Ѿ����ڣ�");
+			if (newfile.exists())
+				System.out.println(newname + "这个名字的文件已经存在");
 			else {
 				oldfile.renameTo(newfile);
 			}
@@ -229,17 +222,12 @@ public class FileBasicOperation extends ToolsBase {
 	}
 
 	/**
-	 * �ƶ��ļ�
-	 * 
+	 * 移动文件
 	 * @param filename
-	 *            �ļ�����
-	 * @param oldpath
-	 *            �ɵĵ�ַ
-	 * @param newpath
-	 *            �µĵ�ַ
-	 * @param cover
-	 *            �Ƿ񸲸�
-	 * @return boolean �Ƿ��ƶ��ɹ�
+	 * @param oldpath 旧文件地址
+	 * @param newpath 目标文件地址
+	 * @param cover   是否覆盖
+	 * @return boolean 
 	 */
 	public boolean removeFile(String filename, String oldpath, String newpath, boolean cover) {
 		System.out.println("oldpath" + oldpath);
@@ -253,14 +241,13 @@ public class FileBasicOperation extends ToolsBase {
 		if (!oldpath.equals(newpath)) {
 			File oldfile = new File(oldpath + "/" + filename);
 			File newfile = new File(newpath + "/" + filename);
-			if (newfile.exists()) {// ���ڴ�ת��Ŀ¼�£��Ѿ����ڴ�ת���ļ�
-				if (cover) {// 是否覆盖
-
+			if (newfile.exists()) {
+				if (cover) {
 					oldfile.renameTo(newfile);
 					oldfile.delete();
 					return true;
 				} else {
-					System.out.println("����Ŀ¼���Ѿ����ڣ�" + filename);
+					System.out.println("已经存在这个文件" + filename);
 					return false;
 				}
 			} else {
@@ -271,41 +258,41 @@ public class FileBasicOperation extends ToolsBase {
 		}
 		return false;
 	}
-
-	public static void fileMove(String from, String to) throws Exception {// 移动指定文件夹内的全部文件
+    /**
+     * 移动文件夹 
+     * @param from
+     * @param to
+     * @throws Exception
+     */
+	public static void fileMove(String from, String to) throws Exception {
 		try {
 			File dir = new File(from);
-			File[] files = dir.listFiles();// 将文件或文件夹放入文件集
-			if (files == null)// 判断文件集是否为空
+			File[] files = dir.listFiles();
+			if (files == null)
 				return;
-			File moveDir = new File(to);// 创建目标目录
-			if (!moveDir.exists()) {// 判断目标目录是否存在
-				moveDir.mkdirs();// 不存在则创建
+			File moveDir = new File(to);
+			if (!moveDir.exists()) {
+				moveDir.mkdirs();
 			}
-			for (int i = 0; i < files.length; i++) {// 遍历文件集
-				if (files[i].isDirectory()) {// 如果是文件夹或目录,则递归调用fileMove方法，直到获得目录下的文件
-					fileMove(files[i].getPath(), to + "\\" + files[i].getName());// 递归移动文件
-					files[i].delete();// 删除文件所在原目录
+			for (int i = 0; i < files.length; i++) {
+				if (files[i].isDirectory()) {
+					fileMove(files[i].getPath(), to + "\\" + files[i].getName());
+					files[i].delete();
 				}
-				File moveFile = new File(moveDir.getPath() + "\\"// 将文件目录放入移动后的目录
+				File moveFile = new File(moveDir.getPath() + "\\"
 						+ files[i].getName());
-				if (moveFile.exists()) {// 目标文件夹下存在的话，删除
+				if (moveFile.exists()) {
 					moveFile.delete();
 				}
-				files[i].renameTo(moveFile);// 移动文件
-				System.out.println(files[i] + " 移动成功");
+				files[i].renameTo(moveFile);
+				System.out.println(files[i] + "");
 			}
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
-	/**
-	 * �ж�����ļ��Ƿ���� �Ƿ����ļ���
-	 * 
-	 * @param file
-	 * @return
-	 */
+
 	public boolean fileExists(File file) {
 		if (super.isNull(file))
 			return false;
