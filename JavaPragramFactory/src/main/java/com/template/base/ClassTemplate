@@ -5,9 +5,6 @@ package #{pagckage};
  * #{comments}
  */
 public #{classType} #{javaName} #{extendsBase} #{implementsBase}{
-
-	#{fields};
-	
+	#{fields}
     #{methods}
-	
 }

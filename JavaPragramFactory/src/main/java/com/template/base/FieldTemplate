@@ -1,5 +1,2 @@
-    /**
-	 * #{comments}
-	 */
     #{fieldAnnotation}
 	#{fieldQualifier} #{fieldType} #{fieldName};

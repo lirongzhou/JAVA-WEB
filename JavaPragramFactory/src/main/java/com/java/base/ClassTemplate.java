@@ -10,8 +10,8 @@ public class ClassTemplate extends TemplateJavaBase {
 	private String javaName;
 	private String extendsBase;
 	private String implementsBase;
-
-	
+	private String classAnnotation;
+	private String comments;
 	List<EnumConstantTemplate> enums;
 	
 	List<FieldTemplate> fields;
@@ -72,7 +72,7 @@ public class ClassTemplate extends TemplateJavaBase {
 		if(null==fields) return "";
 		StringBuffer buffer = new StringBuffer();
 		for (FieldTemplate fieldTemplate : fields) {
-			buffer.append("\n");
+//			buffer.append("\n");
 			buffer.append(fieldTemplate.getTemplateStr());
 		}
 		return buffer.toString();
@@ -87,7 +87,7 @@ public class ClassTemplate extends TemplateJavaBase {
 		StringBuffer buffer = new StringBuffer();
 	
 		for (IMethodTemplate methodTemplate : methods) {
-			buffer.append("\n");
+//			buffer.append("\n");
 			buffer.append(methodTemplate.getTemplateStr());
 		}
 		return buffer.toString();
@@ -116,6 +116,21 @@ public class ClassTemplate extends TemplateJavaBase {
 
 	public void setEnums(List<EnumConstantTemplate> enums) {
 		this.enums = enums;
+	}
+
+	public String getClassAnnotation() {
+		return classAnnotation;
+	}
+
+	public void setClassAnnotation(String classAnnotation) {
+		this.classAnnotation = classAnnotation;
+	}
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 
 }

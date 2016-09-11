@@ -2,6 +2,8 @@ package com.java.base;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +14,7 @@ public abstract class TemplateJavaBase {
 	
 	static TemplateParse  templateParse =new TemplateParse();
 	private static  final String templatePackage="com/template/base";
-	protected String comments;
+	
 
 	public abstract String getTemplateStr() ;
 	
@@ -35,16 +37,27 @@ public abstract class TemplateJavaBase {
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return "";
 	}
 	
-	 public static Map<String,String>  getParesPragram (Object obj) throws IllegalArgumentException, IllegalAccessException {
+	 public static Map<String,String>  getParesPragram (Object obj) throws IllegalArgumentException, IllegalAccessException, NoSuchMethodException, SecurityException, InvocationTargetException {
 		 Map<String,String> paresPragram=new HashMap<String,String>();
 	   	  boolean mark=true;
 	         Class<?> cls = obj.getClass();
 	         String filedName;
+	         Method[] methods=cls.getDeclaredMethods();
+	        
 	        do{
 System.out.println(cls.getSimpleName());
 	        	 Field[] fields = cls.getDeclaredFields();
@@ -53,7 +66,14 @@ System.out.println(cls.getSimpleName());
 					field.setAccessible(true); //设置些属性是可以访问的  
 					val = field.get(obj);//得到此属性的值  
 					if(null!=val){
-						paresPragram.put(field.getName(), val.toString());
+						String getMethod=parGetName(field.getName());
+						if(checkGetMet(methods, getMethod)){
+							Method method=cls.getMethod(getMethod, new Class[] {});
+							
+							paresPragram.put(field.getName(), method.invoke(obj,  new Object[] {}).toString());
+						}else
+							paresPragram.put(field.getName(), "");
+						
 					}else{
 						paresPragram.put(field.getName(), "");
 					}
@@ -67,8 +87,40 @@ System.out.println(cls.getSimpleName());
 	   }
 	 
 
-
+	    /** 
+	     * 拼接某属性的 get方法 
+	     *  
+	     * @param fieldName 
+	     * @return String 
+	     */  
+	    public static String parGetName(String fieldName) {  
+	        if (null == fieldName || "".equals(fieldName)) {  
+	            return null;  
+	        }  
+	        int startIndex = 0;  
+	        if (fieldName.charAt(0) == '_')  
+	            startIndex = 1;  
+	        return "get"  
+	                + fieldName.substring(startIndex, startIndex + 1).toUpperCase()  
+	                + fieldName.substring(startIndex + 1);  
+	    }  
 	
+	    /** 
+	     * 判断是否存在某属性的 get方法 
+	     *  
+	     * @param methods 
+	     * @param fieldGetMet 
+	     * @return boolean 
+	     */  
+	    public static boolean checkGetMet(Method[] methods, String fieldGetMet) {  
+	        for (Method met : methods) {  
+	            if (fieldGetMet.equals(met.getName())) {  
+	                return true;  
+	            }  
+	        }  
+	        return false;  
+	    }  
+	  
     /**
      * 获得文件的绝对根目录
      * @return
@@ -94,12 +146,4 @@ System.out.println(cls.getSimpleName());
 			System.out.println(path);
 			return path;
 		}
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-
 }

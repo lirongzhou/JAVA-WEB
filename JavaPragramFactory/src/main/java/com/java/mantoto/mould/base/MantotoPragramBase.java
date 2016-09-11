@@ -2,14 +2,16 @@ package com.java.mantoto.mould.base;
 
 import com.java.base.ClassTemplate;
 import com.java.base.ClassType;
+import com.java.createpragram.base.CreatePragramBase;
 import com.java.mantoto.mould.emun.JavaLogicClassType;
 import com.java.mantoto.mould.emun.NameaRule;
+import com.mytools.connection.SourceData;
 /**
  * 
  * @author li rong zhou
  *
  */
-public abstract class MantotoPragramBase {
+public abstract class MantotoPragramBase implements  CreatePragramBase{
 
 	public static final String COMMENTS=""
 			+ "\n/**"
@@ -23,16 +25,24 @@ public abstract class MantotoPragramBase {
 	protected  NameaRule nameaRule;
 	protected JavaLogicClassType javaLogicClassType;
 	protected ClassTemplate  classTemplate;
-	
-	protected  void initClass(){
-		this.classTemplate.setClassType(ClassType.CLASS);
-		this.classTemplate.setJavaName(getClassName());
-		this.classTemplate.setPagckage(getPack());
-		this.classTemplate.setComments(COMMENTS);
+	public static SourceData sourceData;
+	protected StringBuffer importStr=new StringBuffer();
+	static{
+		
+		  sourceData=new SourceData();
+		
 	}
-	protected MantotoPragramBase(JavaLogicClassType javaLogicClassType){
+	protected  void initClass(){
+		classTemplate.setClassType(ClassType.CLASS);
+	    classTemplate.setJavaName(getClassName());
+		classTemplate.setPagckage(getPack());
+		classTemplate.setComments(COMMENTS);
+	}
+	protected MantotoPragramBase(JavaLogicClassType javaLogicClassType,NameaRule nameaRule){
 		this.javaLogicClassType=javaLogicClassType;
 		classTemplate=new ClassTemplate();
+		this.nameaRule=nameaRule;
+
 	}
 	
 	public String getTableName() {
@@ -64,7 +74,7 @@ public abstract class MantotoPragramBase {
 	public void setJavaLogicClassType(JavaLogicClassType javaLogicClassType) {
 		this.javaLogicClassType = javaLogicClassType;
 	}
-	
+
 	
 	
 }

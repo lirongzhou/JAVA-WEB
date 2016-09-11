@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import com.mytools.base.RootPath;
 import com.mytutil.config.PropertiesOperation;
 
 public class FillConfig {
@@ -31,8 +32,9 @@ public class FillConfig {
 		PropertiesOperation propertiesOperation = new PropertiesOperation();
 
 		filepath = filepath.replaceAll("\\.", "/");
-
-		Properties properties = propertiesOperation.load(sysPath + "/src/" + filepath + ".properties");
+		sysPath=RootPath.getClassRootPath(FillConfig.class).toString();
+		Properties properties = propertiesOperation.load(sysPath + "/" + filepath + ".properties");
+//		Properties properties = propertiesOperation.load(sysPath + "/src/" + filepath + ".properties");
 
 		Set set = properties.keySet();
 		Iterator iterator = set.iterator();

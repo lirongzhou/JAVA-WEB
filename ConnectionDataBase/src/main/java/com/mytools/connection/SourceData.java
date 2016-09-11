@@ -5,23 +5,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-//import com.java.templet.FileMapperXmlTemplet;
-//import com.java.templet.JavaBeanFileTemplet;
-//import com.java.templet.JavaContorllerIterfaceTemplet;
-//import com.java.templet.JavaFileTempletBase;
-//import com.java.templet.JavaIterfaceCacheImplTemplate;
-//import com.java.templet.JavaIterfaceCacheTemplet;
-//import com.java.templet.JavaIterfaceImplContorllerTemplate;
-//import com.java.templet.JavaIterfaceServiceCacheImplTemplate;
-//import com.java.templet.JavaIterfaceServiceImplTemplate;
-//import com.java.templet.JavaIterfaceServiceTemplet;
-//import com.java.templet.JavaIterfaceTemplet;
-//import com.java.templet.JavaJunitSpringTestTemplet;
-import com.mantoto.util.FindClasses;
-
-public class CreateJavaFile {
+public class SourceData {
 
 	AnalysisCofigInfo analysisCofigInfo = new AnalysisCofigInfo(SqlService.SQLSERVER);
 	Jdbc_Connection Jdbc_Connection = new Jdbc_Connection(analysisCofigInfo.getDataConfigValue(AnalysisCofigInfo.URL),
@@ -36,7 +21,13 @@ public class CreateJavaFile {
 //	 */
 //	private StringBuffer importStr = new StringBuffer();
 //	List<String> tableNames;
-
+    /**
+     * 数据库表中的Column字段 Map
+     * @param rs
+     * @param importStr
+     * @return
+     * @throws SQLException
+     */
 	private Map<String, String> analysisDataType(ResultSet rs,StringBuffer importStr) throws SQLException {
 		Map<String, String> map = new HashMap<String, String>();
 		String type;
@@ -68,21 +59,36 @@ public class CreateJavaFile {
 		rs.close();
 		return map;
 	}
-
+    
 	public boolean isNull(Object o) {
 
 		return null == o || "".equals(o) ? true : false;
 	}
-
+    /**
+     * 获得所有表的名字
+     * @return
+     * @throws SQLException
+     */
 	public List<String> getTableNames() throws SQLException{
 		return Jdbc_Connection.GetTableNames(analysisCofigInfo.getTableSql());
 	}
-	
+	/**
+	 * 数据库表中的Column字段 Map
+	 * @param tableName
+	 * @param importStr
+	 * @return
+	 * @throws SQLException
+	 */
 	public Map<String, String> getJavaFields(String tableName,StringBuffer importStr) throws SQLException{
 		return analysisDataType(
 				Jdbc_Connection.GetTableColumnNames(analysisCofigInfo.getTableColumnSql(tableName)),importStr);
 	}
-	
+	/**
+	 * 获得表中的主键
+	 * @param tableName
+	 * @return
+	 * @throws SQLException
+	 */
 	public String  getPrimaryKey(String tableName) throws SQLException{
 		 return Jdbc_Connection.GetTablePrimaryKey(analysisCofigInfo.getTablePrimaryKeySql(tableName));
 	}

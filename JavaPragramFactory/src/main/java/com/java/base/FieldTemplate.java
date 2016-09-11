@@ -1,11 +1,15 @@
 package com.java.base;
 
+import com.java.mantoto.mould.emun.Qualifier;
+
 public class FieldTemplate extends TemplateJavaBase {
 
 	private String fieldAnnotation;
 	private String fieldType;
 	private String fieldName;
 
+	private Qualifier fieldQualifier;
+	
 	public String getFieldAnnotation() {
 		return fieldAnnotation;
 	}
@@ -34,4 +38,15 @@ public class FieldTemplate extends TemplateJavaBase {
 		// TODO Auto-generated method stub
 		return super.getTemplateStr(this);
 	}
+
+	public String getFieldQualifier() {
+		return fieldQualifier.getName();
+	}
+
+	public void setFieldQualifier(Qualifier fieldQualifier) {
+		this.fieldQualifier = fieldQualifier;
+	}
+
+
+	
 }
