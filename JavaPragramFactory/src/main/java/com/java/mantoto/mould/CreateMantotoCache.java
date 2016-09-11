@@ -4,11 +4,12 @@ import com.java.base.ClassTemplate;
 import com.java.createpragram.base.CreatePragramBase;
 import com.java.mantoto.mould.base.MantotoPragramBase;
 import com.java.mantoto.mould.emun.JavaLogicClassType;
+import com.java.mantoto.mould.emun.NameaRule;
 
 public class CreateMantotoCache extends MantotoPragramBase implements  CreatePragramBase{
 	
 	private Class beanClass;
-	public CreateMantotoCache(String tableName,String pack,Class beanClass){
+	public CreateMantotoCache(String tableName,String pack,Class beanClass,NameaRule nameaRule){
 		super(JavaLogicClassType.CACHE);
 		super.tableName=tableName;
 		super.pack=pack;

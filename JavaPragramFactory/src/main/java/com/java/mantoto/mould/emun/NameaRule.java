@@ -12,7 +12,7 @@ public enum NameaRule {
 	/**
 	 * 首字母大写
 	 */
-	INITIALUPPER(8);
+	INITIALUPPER(8),INITIALLOWER(16);
 	
 
 	private int id;
@@ -31,6 +31,10 @@ public enum NameaRule {
     	  char [] chars= className.toCharArray();
     	  if(chars.length>=1)chars[0]= Character.toUpperCase(chars[0]);
     	  return new String(chars);
+       case INITIALLOWER:
+    	   char [] charsL= className.toCharArray();
+     	  if(charsL.length>=1)charsL[0]= Character.toLowerCase(charsL[0]);
+     	  return new String(charsL);
 		}
 		return className;
 	}

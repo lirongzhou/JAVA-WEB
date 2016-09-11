@@ -23,10 +23,10 @@ public class Main {
 		try {
 			List<String> tableNames=MantotoPragramBase.sourceData.getTableNames();
 			for(String tableName:tableNames){
-				CreatePragramBase pragram=new CreateMantotoBean(tableName, "com.java.mantoto.test",NameaRule.INITIALUPPER);
+				CreatePragramBase pragram=new CreateMantotoBean(tableName, "com.java.main",NameaRule.INITIALUPPER);
 				System.out.println(pragram.getFileContent().getTemplateStr());
 				ClassTemplate classTemplate=	pragram.getFileContent();
-				CrateJavaFile.CreateJava(classTemplate.getJavaName(), classTemplate.getPagckage(), classTemplate.getTemplateStr(), ".java");
+				CrateJavaFile.CreateJavaMaven(classTemplate.getJavaName(), classTemplate.getPagckage(), classTemplate.getTemplateStr(), "java");
 			}
 		
 		} catch (SQLException e) {

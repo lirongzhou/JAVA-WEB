@@ -53,7 +53,9 @@ public class CreateMantotoBean extends MantotoPragramBase {
 		for(Entry<String, String> entry:fields.entrySet()){
 			FieldTemplate fieldTemplate=new FieldTemplate();
 			fieldTemplate.setFieldType(entry.getValue());
-			fieldTemplate.setFieldName(entry.getKey());
+			
+			fieldTemplate.setFieldName(NameaRule.INITIALLOWER.createClassName(entry.getKey()));
+			
 			fieldTemplate.setFieldQualifier(Qualifier.PRIVATE);
 			fieldsList.add(fieldTemplate);
 		}
