@@ -36,6 +36,33 @@ public class CrateJavaFile {
 
 		return false;
 	}
+	public static boolean CreateJavaMaven(String classname, String packag, String content, String Suffix) {
+		FileBasicOperation fileOperation = new FileBasicOperation();
+		String sysPath = System.getProperty("user.dir");
+		String packagPath = packag.replace('.', '\\');
 
+		String filePackagePath = sysPath + "\\src\\" + packagPath;
+		File packageFile = new File(filePackagePath);
+
+		if (!packageFile.exists() || !packageFile.isDirectory()) {
+			packageFile.mkdirs();
+		}
+		sysPath = sysPath + "\\src\\main\\java\\" + packagPath + "\\" + classname + "." + Suffix;
+
+		File file = new File(sysPath);
+
+		try {
+			file.createNewFile();
+
+			fileOperation.setFile(content, sysPath);
+			return true;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// "\r\n"
+
+		return false;
+	}
 
 }
