@@ -1,14 +1,6 @@
 package com.java.main;
 
-import java.sql.SQLException;
-import java.util.List;
-
-import com.java.base.ClassTemplate;
-import com.java.createpragram.base.CreatePragramBase;
-import com.java.mantoto.mould.CreateMantotoBean;
-import com.java.mantoto.mould.base.MantotoPragramBase;
-import com.java.mantoto.mould.emun.NameaRule;
-import com.mytools.file.CrateJavaFile;
+import com.java.mantoto.mould.CreateMantotoMain;
 
 /**
 	* @author  作者 li rong zhou 
@@ -19,19 +11,34 @@ import com.mytools.file.CrateJavaFile;
 public class Main {
    
 	public static void main(String[] args) {
+		CreateMantotoMain createMantotoMain=new CreateMantotoMain();
+//		createMantotoMain.createBean("com.java.main");
 		
-		try {
-			List<String> tableNames=MantotoPragramBase.sourceData.getTableNames();
-			for(String tableName:tableNames){
-				CreatePragramBase pragram=new CreateMantotoBean(tableName, "com.java.main",NameaRule.INITIALUPPER);
-				System.out.println(pragram.getFileContent().getTemplateStr());
-				ClassTemplate classTemplate=	pragram.getFileContent();
-				CrateJavaFile.CreateJavaMaven(classTemplate.getJavaName(), classTemplate.getPagckage(), classTemplate.getTemplateStr(), "java");
-			}
+		createMantotoMain.setBeanPack("com.java.main");
+		createMantotoMain.createDao("com.java.main");
+		createMantotoMain.createService("com.java.main");
+		createMantotoMain.createOpenService("com.java.main");
+		createMantotoMain.createCache("com.java.main");
 		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+//		createMantotoMain.createDaoImpl("com.java.main");
+//		createMantotoMain.createOpenService("com.java.main");
+//		createMantotoMain.createServiceImpl("com.java.main");
+//		createMantotoMain.createCacheImpl("com.java.main");
+		
+		
+//		try {
+//			List<String> tableNames=MantotoPragramBase.sourceData.getTableNames();
+//			for(String tableName:tableNames){
+//				CreatePragramBase pragram=new CreateMantotoBean(tableName, "com.java.main",NameaRule.INITIALUPPER);
+//				System.out.println(pragram.getFileContent().getTemplateStr());
+//				ClassTemplate classTemplate=	pragram.getFileContent();
+//				CrateJavaFile.CreateJavaMaven(classTemplate.getJavaName(), classTemplate.getPagckage(), classTemplate.getTemplateStr(), "java");
+//			}
+//		
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 }

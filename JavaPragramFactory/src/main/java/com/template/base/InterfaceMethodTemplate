@@ -1,6 +1,3 @@
-    /**
-	 * #{comments}
-	 */
     #{methodAnnotation}
 	#{methodQualifier} #{returnType} #{methodName}(#{parameters} );
 	

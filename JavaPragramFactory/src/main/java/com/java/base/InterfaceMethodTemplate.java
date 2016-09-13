@@ -2,9 +2,11 @@ package com.java.base;
 
 import java.util.List;
 
-public class InterfaceMethodTemplate implements IMethodTemplate {
+import com.java.mantoto.mould.emun.Qualifier;
+
+public class InterfaceMethodTemplate extends IMethodTemplate {
 	private String methodAnnotation;
-	private String methodQualifier;
+	private Qualifier methodQualifier;
 	private String returnType;
 	private String methodName;
 	private List<ParameterTemplate> parameters;
@@ -13,7 +15,7 @@ public class InterfaceMethodTemplate implements IMethodTemplate {
 
 	public String getTemplateStr() {
 		// TODO Auto-generated method stub
-		return null;
+		return getTemplateStr(this);
 	}
 
 	public String getMethodAnnotation() {
@@ -25,10 +27,12 @@ public class InterfaceMethodTemplate implements IMethodTemplate {
 	}
 
 	public String getMethodQualifier() {
-		return methodQualifier;
+		if(null!=methodQualifier)
+		return methodQualifier.getName();
+		return null;
 	}
 
-	public void setMethodQualifier(String methodQualifier) {
+	public void setMethodQualifier(Qualifier methodQualifier) {
 		this.methodQualifier = methodQualifier;
 	}
 
@@ -52,7 +56,8 @@ public class InterfaceMethodTemplate implements IMethodTemplate {
 
 		StringBuffer buffer = new StringBuffer();
 		for (ParameterTemplate parameter : parameters) {
-			buffer.append(parameter.getTemplateStr());
+			buffer.append(parameter.getTemplateStr().trim());
+
 			buffer.append(",");
 		}
 

@@ -1,7 +1,4 @@
-    /**
-	 * #{comments}
-	 */
     #{methodAnnotation}
-	#{methodQualifier} #{returnType} #{methodName}(#{parameters} ) {
+	#{methodQualifier} #{returnType} #{methodName}(#{parameters}) {
 		#{methodBody}
 	}

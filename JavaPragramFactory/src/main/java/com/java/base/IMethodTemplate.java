@@ -1,5 +1,5 @@
 package com.java.base;
 
-public interface IMethodTemplate {
-	public String getTemplateStr();
+public abstract class IMethodTemplate extends TemplateJavaBase{
+	
 }

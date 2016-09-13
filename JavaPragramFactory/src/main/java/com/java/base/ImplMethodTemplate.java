@@ -2,7 +2,7 @@ package com.java.base;
 
 import java.util.List;
 
-public class ImplMethodTemplate extends InterfaceMethodTemplate {
+public class ImplMethodTemplate  extends InterfaceMethodTemplate {
 
 	private String methodBody;
 
@@ -12,7 +12,7 @@ public class ImplMethodTemplate extends InterfaceMethodTemplate {
 	// }
 	public String getTemplateStr() {
 		// TODO Auto-generated method stub
-		return null;
+		return getTemplateStr(this);
 	}
 
 	public String getMethodBody() {

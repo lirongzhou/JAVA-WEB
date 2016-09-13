@@ -1,9 +1,13 @@
 package com.java.mantoto.mould.base;
 
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
+
 import com.java.base.ClassTemplate;
 import com.java.base.ClassType;
 import com.java.createpragram.base.CreatePragramBase;
 import com.java.mantoto.mould.emun.JavaLogicClassType;
+import com.java.mantoto.mould.emun.MethodNameRule;
 import com.java.mantoto.mould.emun.NameaRule;
 import com.mytools.connection.SourceData;
 /**
@@ -27,6 +31,7 @@ public abstract class MantotoPragramBase implements  CreatePragramBase{
 	protected ClassTemplate  classTemplate;
 	public static SourceData sourceData;
 	protected StringBuffer importStr=new StringBuffer();
+	protected MethodNameRule methodNameRule;
 	static{
 		
 		  sourceData=new SourceData();
@@ -74,7 +79,11 @@ public abstract class MantotoPragramBase implements  CreatePragramBase{
 	public void setJavaLogicClassType(JavaLogicClassType javaLogicClassType) {
 		this.javaLogicClassType = javaLogicClassType;
 	}
+	public MethodNameRule getMethodNameRule() {
+		return methodNameRule;
+	}
+	public void setMethodNameRule(MethodNameRule methodNameRule) {
+		this.methodNameRule = methodNameRule;
+	}
 
-	
-	
 }
