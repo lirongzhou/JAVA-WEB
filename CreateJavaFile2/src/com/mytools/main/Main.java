@@ -1,6 +1,6 @@
 package com.mytools.main;
 
-import com.mantoto.util.FindClasses;
+
 import com.mytools.connection.CreateJavaFile;
 
 public class Main {
@@ -14,13 +14,13 @@ public class Main {
 		//
 		//
 		//
-//		StringBuffer buffer = new StringBuffer();
-//		buffer.append("import  " + "com.fasterxml.jackson.annotation.JsonView;\r\n");
-//		buffer.append("import  " + "com.mantoto.annotation.ValidateAnnotaion;\r\n");
-//		buffer.append("import  " + "com.mantoto.annotation.ValidateAnnotaion.IsId;\r\n");
-//		buffer.append("import  " + "com.mantoto.base.bean.BeanBase;\r\n");
-//		buffer.append("import  " + "com.mantoto.product.jsonView.ProductView;\r\n");
-//		analysisDataResult.createJavaEntity("com.mantoto.product.model", buffer.toString());
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("import  " + "com.fasterxml.jackson.annotation.JsonView;\r\n");
+		buffer.append("import  " + "com.mantoto.annotation.ValidateAnnotaion;\r\n");
+		buffer.append("import  " + "com.mantoto.annotation.ValidateAnnotaion.IsId;\r\n");
+		buffer.append("import  " + "com.mantoto.base.bean.BeanBase;\r\n");
+		buffer.append("import  " + "com.mantoto.product.jsonView.ProductView;\r\n");
+		analysisDataResult.createJavaEntity("com.mantoto.user.model", buffer.toString());
 ////		// /**
 ////		// * 生成接口的调用方法
 ////		// */
